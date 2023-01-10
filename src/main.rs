@@ -5,8 +5,8 @@ use rand::Rng;
 fn main() {
     println!("Guess the number from 1 - 101!");
 
-    let secret_num = rand::thread_rng().gen_range(1, 101);
-    println!("")
+    let secret_num= rand::thread_rng().gen_range(1, 101);
+
 
     println!("Please input your guess.");
 
@@ -26,5 +26,4 @@ fn main() {
         Ordering::Greater => println!("Incorrect! The answer was: {}", secret_num),
         Ordering::Equal => println!("Correct answer!"),
     }
-
 }
