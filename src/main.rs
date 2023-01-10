@@ -7,23 +7,34 @@ fn main() {
 
     let secret_num= rand::thread_rng().gen_range(1, 101);
 
+    loop {
+        println!("Please input your guess.");
 
-    println!("Please input your guess.");
-
-    let mut u_guess = String::new();
-
-    io::stdin()
-        .read_line(&mut u_guess)
-        .expect("Failed to read line!");
-
-        let u_guess: u32 = u_guess.trim().parse().expect("Please type a number!");
+        let mut u_guess = String::new();
     
-    println!("You guessed: {}", u_guess);
-
-    match u_guess.cmp(&secret_num)
-    {
-        Ordering::Less => println!("Incorrect! The answer was: {}", secret_num),
-        Ordering::Greater => println!("Incorrect! The answer was: {}", secret_num),
-        Ordering::Equal => println!("Correct answer!"),
+        io::stdin()
+            .read_line(&mut u_guess)
+            .expect("Failed to read line!");
+    
+            let u_guess: u32 = match u_guess.trim()
+                .parse()
+                {
+                    Ok(num) => num,
+                    Err(_) => continue,
+                };
+        
+        println!("You guessed: {}", u_guess);
+    
+        match u_guess.cmp(&secret_num)
+        {
+            Ordering::Less => println!("Incorrect! The answer was: {}", secret_num),
+            Ordering::Greater => println!("Incorrect! The answer was: {}", secret_num),
+            Ordering::Equal => {
+                println!("Correct answer!");
+                break;
+            },
+        }      
+        
     }
+
 }
